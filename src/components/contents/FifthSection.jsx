@@ -154,8 +154,6 @@ const ReviewTop = styled.div`
     width: 16px;
     height: 16px;
     margin-left: 2px;
-    border: 1px solid hotpink;
-    background: "pink";
   }
 `;
 
