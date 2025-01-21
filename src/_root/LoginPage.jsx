@@ -1,16 +1,27 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { mq } from "../lib/media-query/mediaQuery";
 
+// --------------------------------------------------------------------------
 const Container = styled.div`
-  display: block;
+  display: flex;
+  justify-content: center;
   width: 100%;
   padding-top: 56px;
 `;
+
 const LoginWrapper = styled.div`
-  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
   padding: 0 20px;
   width: 100%;
+  ${mq("desktop")} {
+    max-width: 1232px;
+    width: 100%;
+  }
 `;
+
 const LoginCard = styled.div`
   padding-top: 64px;
   width: 100%;
@@ -18,7 +29,12 @@ const LoginCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  ${mq("desktop")} {
+    max-width: 400px;
+    width: 100%;
+  }
 `;
+
 const MainLogo = styled.div`
   display: flex;
   flex-direction: column;
@@ -36,17 +52,20 @@ const MainLogo = styled.div`
     font-size: 1.4rem;
   }
 `;
+
 const Login = styled.form`
   margin-top: 64px;
   width: 100%;
   display: flex;
   flex-direction: column;
 `;
+
 const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
 `;
+
 const Button = styled.button`
   display: flex;
   justify-content: center;
@@ -64,6 +83,7 @@ const Button = styled.button`
     height: 18px;
   }
 `;
+
 const ToggleSection = styled.div`
   padding-top: 24px;
   width: 100%;
@@ -75,6 +95,8 @@ const ToggleSection = styled.div`
 `;
 
 const IdInput = styled.input`
+  position: relative;
+  padding: 24px 48px 8px 20px;
   width: 100%;
   height: 56px;
   font-size: 16px;
@@ -82,11 +104,25 @@ const IdInput = styled.input`
   line-height: 22px;
   box-sizing: border-box;
   background: #fff;
-  border: 1px solid #dddddd;
+  border: 1px solid ${(props) => (props.error ? "red" : "#dddddd")};
+  ::placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  &:focus {
+    border-color: ${(props) =>
+      props.error ? "red" : "#2aad5c"}; // 에러 시 빨간색 유지, 아니면 파란색
+    outline: none; // 기본 브라우저 outline 제거
+  }
+
   border-radius: 8px;
   transition: all 0.1s ease-in-out;
 `;
+
 const PwInput = styled.input`
+  position: relative;
+  padding: 24px 48px 8px 20px;
   width: 100%;
   height: 56px;
   font-size: 16px;
@@ -94,10 +130,16 @@ const PwInput = styled.input`
   line-height: 22px;
   box-sizing: border-box;
   background: #fff;
-  border: 1px solid #dddddd;
+  border: 1px solid ${(props) => (props.error ? "red" : "#dddddd")};
+  &:focus {
+    border-color: ${(props) =>
+      props.error ? "red" : "#2aad5c"}; // 에러 시 빨간색 유지, 아니면 파란색
+    outline: none; // 기본 브라우저 outline 제거
+  }
   border-radius: 8px;
   transition: all 0.1s ease-in-out;
 `;
+
 const LoginButton = styled.input`
   width: 100%;
   height: 56px;
@@ -109,6 +151,7 @@ const LoginButton = styled.input`
   border-radius: 8px;
   transition: all 0.1s ease-in-out;
 `;
+
 const About = styled.ul`
   padding: 0;
   margin: 56px 0 0 0;
@@ -134,7 +177,106 @@ const About = styled.ul`
   }
 `;
 
+const ErrorMessage = styled.div`
+  color: red;
+  font-size: 14px;
+  margin-top: 8px;
+`;
+
+// --------------------------------본문---------------------------------------
+
 const LoginPage = () => {
+  const [showEmailLogin, setShowEmailLogin] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [error, setError] = useState({ userName: "", userPassword: "" });
+  const navigate = useNavigate(); // 페이지 이동을 위한 Hook
+
+  // 로그인 폼 토글 기능
+  const handleEmailLoginToggle = (event) => {
+    event.preventDefault(); // 새로고침 막는 기능
+    setShowEmailLogin((prev) => !prev); // 이메일 로그인 폼 Show/Hide
+  };
+
+  // 개별 입력값 검증
+  const handleInputChange = (field, value) => {
+    // 입력값 업데이트
+    if (field === "userName") setUserName(value);
+    if (field === "userPassword") setUserPassword(value);
+    // 에러 상태 업데이트 (유효하면 에러를 초기화)
+    setError((prev) => {
+      const newErrors = { ...prev };
+
+      if (field === "userName") {
+        if (!value) {
+          newErrors.userName = "아이디를 입력해주세요.";
+        } else if (
+          !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)
+        ) {
+          newErrors.userName = "유효한 이메일 형식이 아닙니다.";
+        } else {
+          newErrors.userName = ""; // 에러 초기화
+        }
+      }
+
+      if (field === "userPassword") {
+        if (!value) {
+          newErrors.userPassword = "비밀번호를 입력해주세요.";
+        } else {
+          newErrors.userPassword = ""; // 에러 초기화
+        }
+      }
+
+      return newErrors;
+    });
+  };
+
+  const validateInputs = () => {
+    let isValid = true; // 초기값을 참으로 설정
+    const newErrors = { userName: "", userPassword: "" }; // 에러 메세지 저장
+
+    // 아이디 검증
+    if (!userName) {
+      // 아이디 입력칸이 비어 있을 경우
+      isValid = false; // isValid를 false로 변환
+      newErrors.userName = "아이디를 입력해주세요."; // 아이디가 비어있으면 오류 메시지
+    } else if (
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(userName)
+    ) {
+      // 아이디가 이메일 형식이어야 한다는 설정
+      isValid = false; // isValid를 false로 변환
+      newErrors.userName = "유효한 이메일 형식이 아닙니다."; // 아이디 형식이 잘못되었을 때 오류 메시지
+    }
+
+    // 비밀번호 검증
+    if (!userPassword) {
+      // 비밀번호 입력칸이 비어 있을 경우
+      isValid = false; // isValid를 false로 변환
+      newErrors.userPassword = "비밀번호를 입력해주세요."; // 비밀번호가 비어있으면 오류 메시지
+    }
+
+    // 에러 상태 업데이트
+    setError(newErrors);
+
+    // 검증이 끝났으면 isValid 반환 (true면 유효한 값, false면 오류 있음)
+    return isValid;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // 기본 폼 제출 동작 방지
+    if (validateInputs()) {
+      // 유효성 검사 통과 시 동작
+      if (userName === "testUser" && userPassword === "testPass") {
+        alert("로그인 성공!");
+        navigate("/");
+      } else {
+        setError((prev) => ({
+          ...prev,
+          form: "아이디 또는 비밀번호가 올바르지 않습니다.",
+        }));
+      }
+    }
+  };
   const buttonArr = [
     {
       id: 1,
@@ -161,12 +303,6 @@ const LoginPage = () => {
       font_color: "#757575",
     },
   ];
-  const [showEmailLogin, setShowEmailLogin] = useState(false);
-
-  const handleEmailLoginToggle = () => {
-    event.preventDefault();
-    setShowEmailLogin((prev) => !prev);
-  };
 
   return (
     <Container>
@@ -174,11 +310,11 @@ const LoginPage = () => {
         <LoginCard>
           <MainLogo>
             <a href="#">
-              <img src="/public/logo1.svg" alt="로고" />
+              <img src="/logo1.svg" alt="로고" />
             </a>
             <p>필요한 것만, 필요한 만큼만</p>
           </MainLogo>
-          <Login action="" method="post">
+          <Login action="#" method="post" onSubmit={handleSubmit}>
             <ButtonWrapper>
               {buttonArr.map((item) => (
                 <Button
@@ -189,7 +325,7 @@ const LoginPage = () => {
                     item.title === "이메일" ? handleEmailLoginToggle : null
                   }
                 >
-                  <img src={`/public/${item.img}.svg`} alt="아이콘" />
+                  <img src={`/${item.img}.svg`} alt="아이콘" />
                   <a href={item.href}>{item.title}로 계속하기</a>
                 </Button>
               ))}
@@ -197,15 +333,31 @@ const LoginPage = () => {
             <ToggleSection isVisible={showEmailLogin}>
               <IdInput
                 type="text"
-                name="userName"
+                value={userName}
+                onChange={(e) => handleInputChange("userName", e.target.value)}
+                error={!!error.userName}
                 placeholder="아이디를 입력해주세요"
               />
+              {error.userName && <ErrorMessage>{error.userName}</ErrorMessage>}
+
               <PwInput
                 type="password"
-                name="userPassword"
+                value={userPassword}
+                onChange={(e) =>
+                  handleInputChange("userPassword", e.target.value)
+                }
+                error={!!error.userPassword}
                 placeholder="비밀번호를 입력해주세요"
               />
-              <LoginButton type="submit" value="로그인" />
+              {error.userPassword && (
+                <ErrorMessage>{error.userPassword}</ErrorMessage>
+              )}
+
+              <LoginButton
+                type="submit"
+                value="로그인"
+                onSubmit={handleSubmit}
+              />
             </ToggleSection>
 
             <About>
