@@ -12,14 +12,11 @@ const Container = styled.div`
 `;
 
 const LoginWrapper = styled.div`
+  max-width: 400px;
   display: flex;
   justify-content: center;
   padding: 0 20px;
   width: 100%;
-  ${mq("desktop")} {
-    max-width: 1232px;
-    width: 100%;
-  }
 `;
 
 const LoginCard = styled.div`
@@ -29,10 +26,6 @@ const LoginCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  ${mq("desktop")} {
-    max-width: 400px;
-    width: 100%;
-  }
 `;
 
 const MainLogo = styled.div`
@@ -140,6 +133,26 @@ const PwInput = styled.input`
   transition: all 0.1s ease-in-out;
 `;
 
+const InputWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  label {
+    z-index: 2;
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    color: ${(props) => (props.error ? "red" : "#757575")};
+  }
+
+  input:focus + label,
+  input:not(:placeholder-shown) + label {
+    transition: all 0.1s ease-in-out;
+    top: 8px;
+    left: 20px;
+    font-size: 12px;
+  }
+`;
+
 const LoginButton = styled.input`
   width: 100%;
   height: 56px;
@@ -180,7 +193,7 @@ const About = styled.ul`
 const ErrorMessage = styled.div`
   color: red;
   font-size: 14px;
-  margin-top: 8px;
+  margin-top: 4px;
 `;
 
 // --------------------------------본문---------------------------------------
@@ -203,6 +216,7 @@ const LoginPage = () => {
     // 입력값 업데이트
     if (field === "userName") setUserName(value);
     if (field === "userPassword") setUserPassword(value);
+
     // 에러 상태 업데이트 (유효하면 에러를 초기화)
     setError((prev) => {
       const newErrors = { ...prev };
@@ -222,6 +236,14 @@ const LoginPage = () => {
       if (field === "userPassword") {
         if (!value) {
           newErrors.userPassword = "비밀번호를 입력해주세요.";
+        } else if (userPassword.length < 4) {
+          newErrors.userPassword = "비밀번호가 너무 짧습니다";
+        } else if (!/\d/.test(userPassword)) {
+          newErrors.userPassword =
+            "비밀번호는 1개 이상의 숫자를 포함해야 합니다.";
+        } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(userPassword)) {
+          newErrors.userPassword =
+            "비밀번호는 1개 이상의 기호를 포함해야 합니다.";
         } else {
           newErrors.userPassword = ""; // 에러 초기화
         }
@@ -231,36 +253,49 @@ const LoginPage = () => {
     });
   };
 
-  const validateInputs = () => {
-    let isValid = true; // 초기값을 참으로 설정
-    const newErrors = { userName: "", userPassword: "" }; // 에러 메세지 저장
+  // const validateInputs = () => {
+  //   let isValid = true; // 초기값을 참으로 설정
+  //   const newErrors = { userName: "", userPassword: "" }; // 에러 메세지 저장
 
-    // 아이디 검증
-    if (!userName) {
-      // 아이디 입력칸이 비어 있을 경우
-      isValid = false; // isValid를 false로 변환
-      newErrors.userName = "아이디를 입력해주세요."; // 아이디가 비어있으면 오류 메시지
-    } else if (
-      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(userName)
-    ) {
-      // 아이디가 이메일 형식이어야 한다는 설정
-      isValid = false; // isValid를 false로 변환
-      newErrors.userName = "유효한 이메일 형식이 아닙니다."; // 아이디 형식이 잘못되었을 때 오류 메시지
-    }
+  //   // 아이디 검증
+  //   if (!userName) {
+  //     // 아이디 입력칸이 비어 있을 경우
+  //     isValid = false; // isValid를 false로 변환
+  //     newErrors.userName = "아이디를 입력해주세요."; // 아이디가 비어있으면 오류 메시지
+  //   } else if (
+  //     !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(userName)
+  //   ) {
+  //     // 아이디가 이메일 형식이어야 한다는 설정
+  //     isValid = false; // isValid를 false로 변환
+  //     newErrors.userName = "유효한 이메일 형식이 아닙니다."; // 아이디 형식이 잘못되었을 때 오류 메시지
+  //   }
 
-    // 비밀번호 검증
-    if (!userPassword) {
-      // 비밀번호 입력칸이 비어 있을 경우
-      isValid = false; // isValid를 false로 변환
-      newErrors.userPassword = "비밀번호를 입력해주세요."; // 비밀번호가 비어있으면 오류 메시지
-    }
+  //   // 비밀번호 검증
+  //   if (!userPassword) {
+  //     // 비밀번호 입력칸이 비어 있을 경우
+  //     isValid = false; // isValid를 false로 변환
+  //     newErrors.userPassword = "비밀번호를 입력해주세요."; // 비밀번호가 비어있으면 오류 메시지
+  //   } else if (userPassword.length < 4 || value.length > 20) {
+  //     //비밀번호가 짧은 경우
+  //     isValid = false;
+  //     newErrors.userPassword = "비밀번호가 너무 짧습니다";
+  //   } else if (!/\d/.test(userPassword)) {
+  //     //비밀번호가 짧은 경우
+  //     isValid = false;
+  //     newErrors.userPassword = "비밀번호는 1개 이상의 숫자를 포함해야 합니다";
+  //   } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(userPassword)) {
+  //     //비밀번호가 짧은 경우
+  //     isValid = false;
+  //     newErrors.userPassword =
+  //       "비밀번호는 1개 이상의 특수문자를 포함해야 합니다";
+  //   }
 
-    // 에러 상태 업데이트
-    setError(newErrors);
+  //   // 에러 상태 업데이트
+  //   setError(newErrors);
 
-    // 검증이 끝났으면 isValid 반환 (true면 유효한 값, false면 오류 있음)
-    return isValid;
-  };
+  //   // 검증이 끝났으면 isValid 반환 (true면 유효한 값, false면 오류 있음)
+  //   return isValid;
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault(); // 기본 폼 제출 동작 방지
@@ -309,11 +344,12 @@ const LoginPage = () => {
       <LoginWrapper>
         <LoginCard>
           <MainLogo>
-            <a href="#">
+            <a href="/">
               <img src="/logo1.svg" alt="로고" />
             </a>
             <p>필요한 것만, 필요한 만큼만</p>
           </MainLogo>
+
           <Login action="#" method="post" onSubmit={handleSubmit}>
             <ButtonWrapper>
               {buttonArr.map((item) => (
@@ -330,28 +366,39 @@ const LoginPage = () => {
                 </Button>
               ))}
             </ButtonWrapper>
-            <ToggleSection isVisible={showEmailLogin}>
-              <IdInput
-                type="text"
-                value={userName}
-                onChange={(e) => handleInputChange("userName", e.target.value)}
-                error={!!error.userName}
-                placeholder="아이디를 입력해주세요"
-              />
-              {error.userName && <ErrorMessage>{error.userName}</ErrorMessage>}
 
-              <PwInput
-                type="password"
-                value={userPassword}
-                onChange={(e) =>
-                  handleInputChange("userPassword", e.target.value)
-                }
-                error={!!error.userPassword}
-                placeholder="비밀번호를 입력해주세요"
-              />
-              {error.userPassword && (
-                <ErrorMessage>{error.userPassword}</ErrorMessage>
-              )}
+            <ToggleSection isVisible={showEmailLogin}>
+              <InputWrapper>
+                <IdInput
+                  type="text"
+                  value={userName}
+                  onChange={(e) =>
+                    handleInputChange("userName", e.target.value)
+                  }
+                  error={!!error.userName}
+                  placeholder=""
+                />
+                <label>아이디를 입력해주세요</label>
+                {error.userName && (
+                  <ErrorMessage>{error.userName}</ErrorMessage>
+                )}
+              </InputWrapper>
+
+              <InputWrapper>
+                <PwInput
+                  type="password"
+                  value={userPassword}
+                  onChange={(e) =>
+                    handleInputChange("userPassword", e.target.value)
+                  }
+                  error={!!error.userPassword}
+                  placeholder=""
+                />
+                <label>비밀번호를 입력해주세요</label>
+                {error.userPassword && (
+                  <ErrorMessage>{error.userPassword}</ErrorMessage>
+                )}
+              </InputWrapper>
 
               <LoginButton
                 type="submit"

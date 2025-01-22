@@ -27,7 +27,7 @@ const DesktopMenu = () => {
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="/login">
             <img src="../../../public/user.svg" alt="" />
           </a>
         </li>
