@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import Contents from "./components/contents/Contents";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginPage from "./_root/LoginPage";
+import SignupPage from "./_root/SignupPage";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -22,7 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Contents />} />
         <Route path="/login" element={<LoginPage />} />
-        {/* <Route path="/signup" element={<SignupPage />} /> */}
+        <Route path="/SignupPage" element={<SignupPage />} />
       </Routes>
       <Wrapper>
         <Header />

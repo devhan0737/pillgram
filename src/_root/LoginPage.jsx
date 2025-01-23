@@ -98,11 +98,6 @@ const IdInput = styled.input`
   box-sizing: border-box;
   background: #fff;
   border: 1px solid ${(props) => (props.error ? "red" : "#dddddd")};
-  ::placeholder {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
   &:focus {
     border-color: ${(props) =>
       props.error ? "red" : "#2aad5c"}; // 에러 시 빨간색 유지, 아니면 파란색
@@ -163,6 +158,12 @@ const LoginButton = styled.input`
   border: 1px solid #dddddd;
   border-radius: 8px;
   transition: all 0.1s ease-in-out;
+
+  &:hover {
+    background: linear-gradient(96deg, #1dc25c 5.56%, #2aad5c 61.87%);
+    color: #fff;
+    transition: all 0.1s ease-in-out;
+  }
 `;
 
 const About = styled.ul`
@@ -253,49 +254,49 @@ const LoginPage = () => {
     });
   };
 
-  // const validateInputs = () => {
-  //   let isValid = true; // 초기값을 참으로 설정
-  //   const newErrors = { userName: "", userPassword: "" }; // 에러 메세지 저장
+  const validateInputs = () => {
+    let isValid = true; // 초기값을 참으로 설정
+    const newErrors = { userName: "", userPassword: "" }; // 에러 메세지 저장
 
-  //   // 아이디 검증
-  //   if (!userName) {
-  //     // 아이디 입력칸이 비어 있을 경우
-  //     isValid = false; // isValid를 false로 변환
-  //     newErrors.userName = "아이디를 입력해주세요."; // 아이디가 비어있으면 오류 메시지
-  //   } else if (
-  //     !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(userName)
-  //   ) {
-  //     // 아이디가 이메일 형식이어야 한다는 설정
-  //     isValid = false; // isValid를 false로 변환
-  //     newErrors.userName = "유효한 이메일 형식이 아닙니다."; // 아이디 형식이 잘못되었을 때 오류 메시지
-  //   }
+    // 아이디 검증
+    if (!userName) {
+      // 아이디 입력칸이 비어 있을 경우
+      isValid = false; // isValid를 false로 변환
+      newErrors.userName = "아이디를 입력해주세요."; // 아이디가 비어있으면 오류 메시지
+    } else if (
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(userName)
+    ) {
+      // 아이디가 이메일 형식이어야 한다는 설정
+      isValid = false; // isValid를 false로 변환
+      newErrors.userName = "유효한 이메일 형식이 아닙니다."; // 아이디 형식이 잘못되었을 때 오류 메시지
+    }
 
-  //   // 비밀번호 검증
-  //   if (!userPassword) {
-  //     // 비밀번호 입력칸이 비어 있을 경우
-  //     isValid = false; // isValid를 false로 변환
-  //     newErrors.userPassword = "비밀번호를 입력해주세요."; // 비밀번호가 비어있으면 오류 메시지
-  //   } else if (userPassword.length < 4 || value.length > 20) {
-  //     //비밀번호가 짧은 경우
-  //     isValid = false;
-  //     newErrors.userPassword = "비밀번호가 너무 짧습니다";
-  //   } else if (!/\d/.test(userPassword)) {
-  //     //비밀번호가 짧은 경우
-  //     isValid = false;
-  //     newErrors.userPassword = "비밀번호는 1개 이상의 숫자를 포함해야 합니다";
-  //   } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(userPassword)) {
-  //     //비밀번호가 짧은 경우
-  //     isValid = false;
-  //     newErrors.userPassword =
-  //       "비밀번호는 1개 이상의 특수문자를 포함해야 합니다";
-  //   }
+    // 비밀번호 검증
+    if (!userPassword) {
+      // 비밀번호 입력칸이 비어 있을 경우
+      isValid = false; // isValid를 false로 변환
+      newErrors.userPassword = "비밀번호를 입력해주세요."; // 비밀번호가 비어있으면 오류 메시지
+    } else if (userPassword.length < 4 || value.length > 20) {
+      //비밀번호가 짧은 경우
+      isValid = false;
+      newErrors.userPassword = "비밀번호가 너무 짧습니다";
+    } else if (!/\d/.test(userPassword)) {
+      //비밀번호가 짧은 경우
+      isValid = false;
+      newErrors.userPassword = "비밀번호는 1개 이상의 숫자를 포함해야 합니다";
+    } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(userPassword)) {
+      //비밀번호가 짧은 경우
+      isValid = false;
+      newErrors.userPassword =
+        "비밀번호는 1개 이상의 특수문자를 포함해야 합니다";
+    }
 
-  //   // 에러 상태 업데이트
-  //   setError(newErrors);
+    // 에러 상태 업데이트
+    setError(newErrors);
 
-  //   // 검증이 끝났으면 isValid 반환 (true면 유효한 값, false면 오류 있음)
-  //   return isValid;
-  // };
+    // 검증이 끝났으면 isValid 반환 (true면 유효한 값, false면 오류 있음)
+    return isValid;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault(); // 기본 폼 제출 동작 방지
@@ -415,7 +416,7 @@ const LoginPage = () => {
                 <a href="#">비밀번호 재설정</a>
               </li>
               <li>
-                <a href="#">회원가입</a>
+                <a href="/SignupPage">회원가입</a>
               </li>
             </About>
           </Login>

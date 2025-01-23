@@ -49,6 +49,11 @@ const Logo = styled.h1`
 const Header = () => {
   const location = useLocation();
   console.log(location.pathname);
+
+  const hideFooter = ["/login", "/SignupPage"].some((path) =>
+    location.pathname.includes(path)
+  );
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -56,7 +61,7 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   return (
-    <Container hide={location.pathname.includes("login")}>
+    <Container hide={hideFooter}>
       <Nav>
         <Logo>
           <a href="/"></a>

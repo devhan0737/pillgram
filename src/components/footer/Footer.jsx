@@ -48,8 +48,12 @@ const SnsIcon = styled.div`
 const Footer = () => {
   const location = useLocation();
 
+  const hideFooter = ["/login", "/SignupPage"].some((path) =>
+    location.pathname.includes(path)
+  );
+
   return (
-    <Container hide={location.pathname.includes("login")}>
+    <Container hide={hideFooter}>
       <FooterContents>
         <FooterInfo>
           <li>
