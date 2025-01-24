@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { mq } from "../lib/media-query/mediaQuery";
+import { BUTTON_ARR } from "../assets/static-values";
 
 // --------------------------------------------------------------------------
 const Container = styled.div`
@@ -71,6 +71,7 @@ const Button = styled.button`
   background: ${(props) => props.bgColor || "#000"};
   border-radius: 10px;
   cursor: pointer;
+
   img {
     width: 18px;
     height: 18px;
@@ -98,39 +99,41 @@ const IdInput = styled.input`
   box-sizing: border-box;
   background: #fff;
   border: 1px solid ${(props) => (props.error ? "red" : "#dddddd")};
+  border-radius: 8px;
+  transition: all 0.1s ease-in-out;
+
   &:focus {
     border-color: ${(props) =>
       props.error ? "red" : "#2aad5c"}; // 에러 시 빨간색 유지, 아니면 파란색
     outline: none; // 기본 브라우저 outline 제거
   }
-
-  border-radius: 8px;
-  transition: all 0.1s ease-in-out;
 `;
 
 const PwInput = styled.input`
   position: relative;
-  padding: 24px 48px 8px 20px;
   width: 100%;
   height: 56px;
+  padding: 24px 48px 8px 20px;
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
   box-sizing: border-box;
   background: #fff;
   border: 1px solid ${(props) => (props.error ? "red" : "#dddddd")};
+  border-radius: 8px;
+  transition: all 0.1s ease-in-out;
+
   &:focus {
     border-color: ${(props) =>
       props.error ? "red" : "#2aad5c"}; // 에러 시 빨간색 유지, 아니면 파란색
     outline: none; // 기본 브라우저 outline 제거
   }
-  border-radius: 8px;
-  transition: all 0.1s ease-in-out;
 `;
 
 const InputWrapper = styled.div`
   position: relative;
   width: 100%;
+
   label {
     z-index: 2;
     position: absolute;
@@ -174,9 +177,11 @@ const About = styled.ul`
   gap: 24px;
   color: #757575;
   font-size: 1.4rem;
+
   li {
     position: relative;
   }
+
   li:nth-child(2)::before,
   li:nth-child(3)::before {
     content: "";
@@ -204,11 +209,11 @@ const LoginPage = () => {
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [error, setError] = useState({ userName: "", userPassword: "" });
+
   const navigate = useNavigate(); // 페이지 이동을 위한 Hook
 
   // 로그인 폼 토글 기능
   const handleEmailLoginToggle = (event) => {
-    event.preventDefault(); // 새로고침 막는 기능
     setShowEmailLogin((prev) => !prev); // 이메일 로그인 폼 Show/Hide
   };
 
@@ -300,6 +305,7 @@ const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault(); // 기본 폼 제출 동작 방지
+
     if (validateInputs()) {
       // 유효성 검사 통과 시 동작
       if (userName === "testUser" && userPassword === "testPass") {
@@ -313,32 +319,6 @@ const LoginPage = () => {
       }
     }
   };
-  const buttonArr = [
-    {
-      id: 1,
-      title: "카카오",
-      img: "icon_kakao_black",
-      href: "#kakao",
-      color: "#fee500",
-      font_color: "#222222",
-    },
-    {
-      id: 2,
-      title: "네이버",
-      img: "icon_naver_white",
-      href: "#naver",
-      color: "#03c75a",
-      font_color: "#ffffff",
-    },
-    {
-      id: 3,
-      title: "이메일",
-      img: "icon_email_gray",
-      href: "#email",
-      color: "#f8f9fa",
-      font_color: "#757575",
-    },
-  ];
 
   return (
     <Container>
@@ -353,7 +333,7 @@ const LoginPage = () => {
 
           <Login action="#" method="post" onSubmit={handleSubmit}>
             <ButtonWrapper>
-              {buttonArr.map((item) => (
+              {BUTTON_ARR.map((item) => (
                 <Button
                   key={item.id}
                   bgColor={item.color}
@@ -363,6 +343,7 @@ const LoginPage = () => {
                   }
                 >
                   <img src={`/${item.img}.svg`} alt="아이콘" />
+
                   <a href={item.href}>{item.title}로 계속하기</a>
                 </Button>
               ))}
@@ -380,6 +361,7 @@ const LoginPage = () => {
                   placeholder=""
                 />
                 <label>아이디를 입력해주세요</label>
+
                 {error.userName && (
                   <ErrorMessage>{error.userName}</ErrorMessage>
                 )}
