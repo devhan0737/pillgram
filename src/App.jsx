@@ -4,11 +4,11 @@ import Header from "./components/Header/Header";
 import Contents from "./components/contents/Contents";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginPage from "./_root/LoginPage";
-import SignupPage from "./_root/SignupPage";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Footer from "./components/footer/Footer";
+import ZodSignupPage from "./_root/ZodSignupPage";
 
 const Wrapper = styled.div`
   display: flex;
@@ -23,7 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Contents />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/SignupPage" element={<SignupPage />} />
+        <Route path="/SignupPage" element={<ZodSignupPage />} />
       </Routes>
       <Wrapper>
         <Header />
