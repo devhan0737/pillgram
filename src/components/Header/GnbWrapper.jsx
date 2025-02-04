@@ -27,7 +27,7 @@ const GnbWrap = styled.div`
   }
 `;
 
-const Gnb = styled.div`
+const Gnb = styled.ul`
   display: flex;
   flex-direction: column;
   max-width: 100%;
@@ -36,6 +36,7 @@ const Gnb = styled.div`
   top: 64px;
   left: 0;
   box-sizing: border-box;
+  list-style: none;
 
   ${mq("desktop")} {
     padding: 0;
@@ -64,7 +65,7 @@ const Gnb = styled.div`
       ${mq("desktop")} {
         font-size: 1.8rem;
       }
-      a:hover {
+      &:hover a {
         color: #2aad5c; /* hover 시 색상 */
       }
     }
