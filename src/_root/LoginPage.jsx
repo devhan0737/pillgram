@@ -141,14 +141,6 @@ const InputWrapper = styled.div`
     left: 30px;
     color: ${(props) => (props.error ? "red" : "#757575")};
   }
-
-  input:focus + label,
-  input:not(:placeholder-shown) + label {
-    transition: all 0.1s ease-in-out;
-    top: 8px;
-    left: 20px;
-    font-size: 12px;
-  }
 `;
 
 const LoginButton = styled.input`

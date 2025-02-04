@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { INPUT_FIELD_ARR } from "../assets/join-static-values";
@@ -28,37 +28,24 @@ const InputField = styled.div`
     top: 18px;
     left: 24px;
     font-size: 1.6rem;
-    color: ${({ isvalid, isFocused }) =>
-      isFocused
-        ? "green"
-        : isvalid === true
-        ? "green"
-        : isvalid === false
-        ? "red"
-        : "#aaaaaa"};
+    transition: all 0.3s ease-in-out;
   }
 `;
 const InputWrapper = styled.div`
+  position: relative;
   width: 100%;
   input {
     position: relative;
-    border: 1px solid
-      ${({ isvalid, isFocused }) =>
-        isFocused
-          ? "green"
-          : isvalid === true
-          ? "green"
-          : isvalid === false
-          ? "red"
-          : "#aaaaaa"};
-
+    border: 1px solid #aaaaaa;
     border-radius: 10px;
     box-sizing: border-box;
     width: 100%;
     height: 56px;
     padding: 10px 0 0 24px;
+    transition: border-color 0.3s ease-in-out;
     &:focus {
-      border: 1px solid green; /* 포커스 시 초록색 */
+      border: 1px solid green;
+      outline: none;
     }
   }
   button {
@@ -124,7 +111,6 @@ const SignForm = () => {
       <FormBox onSubmit={handleSubmit(onSubmit)}>
         {INPUT_FIELD_ARR.map((field) => {
           const isvalid = errors[field.id] === undefined; // 유효성 검사 통과 여부
-          const [isFocused, setIsFocused] = React.useState(false); // 포커스 상태 관리
           return (
             <InputField key={field.id} isvalid={isvalid}>
               <label htmlFor={field.id}>{field.label}</label>
@@ -133,8 +119,6 @@ const SignForm = () => {
                   id={field.id}
                   type={field.type}
                   {...register(field.id, field.validation)}
-                  onFocus={() => setIsFocused(true)} // 포커스 상태를 true로 설정
-                  onBlur={() => setIsFocused(false)} // 포커스 상태를 false로 설정
                 />
                 {field.buttonText && <button>{field.buttonText}</button>}
               </InputWrapper>
