@@ -22,7 +22,9 @@ const InputField = styled.div`
   flex-direction: column;
   width: 100%;
   position: relative;
+
   label {
+    color: ${({ hasError }) => (hasError ? "red" : "#aaaaaa")};
     z-index: 2;
     position: absolute;
     top: 18px;
@@ -30,24 +32,33 @@ const InputField = styled.div`
     font-size: 1.6rem;
     transition: all 0.3s ease-in-out;
   }
+
+  input:focus + label,
+  input:not(:placeholder-shown) + label {
+    top: 8px;
+    left: 16px;
+    font-size: 12px;
+    color: ${({ hasError }) => (hasError ? "red" : "black")};
+  }
 `;
 const InputWrapper = styled.div`
   position: relative;
   width: 100%;
   input {
     position: relative;
-    border: 1px solid #aaaaaa;
+    border: 1px solid ${({ hasError }) => (hasError ? "red" : "#aaaaaa")};
     border-radius: 10px;
     box-sizing: border-box;
     width: 100%;
     height: 56px;
-    padding: 10px 0 0 24px;
+    padding: 18px 24px 6px;
     transition: border-color 0.3s ease-in-out;
     &:focus {
       border: 1px solid green;
       outline: none;
     }
   }
+
   button {
     box-sizing: border-box;
     width: 92px;
@@ -110,19 +121,20 @@ const SignForm = () => {
     <Container>
       <FormBox onSubmit={handleSubmit(onSubmit)}>
         {INPUT_FIELD_ARR.map((field) => {
-          const isvalid = errors[field.id] === undefined; // 유효성 검사 통과 여부
+          const hasError = errors[field.id];
           return (
-            <InputField key={field.id} isvalid={isvalid}>
-              <label htmlFor={field.id}>{field.label}</label>
-              <InputWrapper isvalid={isvalid}>
+            <InputField key={field.id} isvalid={hasError}>
+              <InputWrapper isvalid={hasError}>
                 <input
                   id={field.id}
                   type={field.type}
+                  placeholder=""
                   {...register(field.id, field.validation)}
                 />
+                <label htmlFor={field.id}>{field.label}</label>
                 {field.buttonText && <button>{field.buttonText}</button>}
               </InputWrapper>
-              {errors[field.id] && <span>{errors[field.id].message}</span>}
+              {hasError && <span>{hasError.message}</span>}
             </InputField>
           );
         })}

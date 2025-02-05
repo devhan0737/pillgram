@@ -28,6 +28,7 @@ const GnbWrap = styled.div`
 `;
 
 const Gnb = styled.ul`
+  margin: 0;
   display: flex;
   flex-direction: column;
   max-width: 100%;
