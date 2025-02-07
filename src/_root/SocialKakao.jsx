@@ -5,6 +5,18 @@ import styled from "styled-components";
 
 const KakaoLoginWrapper = styled.div`
   width: 100%;
+  button {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    border: 1px solid #fee500;
+    color: #000;
+    width: 100%;
+    padding: 14px 12px 12px;
+    background: #fee500;
+    border-radius: 10px;
+    cursor: pointer;
+  }
 `;
 
 const SocialKakao = () => {
@@ -40,21 +52,9 @@ const SocialKakao = () => {
           }}
           onLogout={() => console.log("로그아웃")}
           render={({ onClick }) => (
-            <button
-              onClick={onClick}
-              style={{
-                backgroundColor: "#FEE500",
-                border: "none",
-                padding: "10px",
-                borderRadius: "8px",
-                cursor: "pointer",
-              }}
-            >
-              <img
-                src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_large_wide.png"
-                alt="카카오 로그인"
-                style={{ width: "200px" }}
-              />
+            <button onClick={onClick}>
+              <img src="/public/icon_kakao_black.svg" alt="카카오icon" />
+              카카오로 계속하기
             </button>
           )}
         />

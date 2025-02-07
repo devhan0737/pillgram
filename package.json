@@ -15,6 +15,7 @@
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.54.2",
     "react-kakao-login": "^2.1.1",
+    "react-naver-login": "^0.1.4",
     "react-responsive": "^10.0.0",
     "react-router-dom": "^7.1.2",
     "styled-components": "^6.1.14",

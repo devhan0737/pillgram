@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { BUTTON_ARR } from "../assets/static-values";
+import SocialKakao from "./SocialKakao";
+import SocialNaver from "./SocialNaver";
 // --------------------------------------------------------------------------
 const Container = styled.div`
   display: flex;
@@ -324,6 +326,8 @@ const LoginPage = () => {
 
           <Login action="#" method="post" onSubmit={handleSubmit}>
             <ButtonWrapper>
+              <SocialKakao />
+              <SocialNaver />
               {BUTTON_ARR.map((item) => (
                 <Button
                   key={item.id}
@@ -335,7 +339,11 @@ const LoginPage = () => {
                 >
                   <img src={`/${item.img}.svg`} alt="아이콘" />
 
-                  <a href={item.href}>{item.title}로 계속하기</a>
+                  {
+                    <a href={item.href} onClick={item.onClick}>
+                      {item.title}로 계속하기
+                    </a>
+                  }
                 </Button>
               ))}
             </ButtonWrapper>

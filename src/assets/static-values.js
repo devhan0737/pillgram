@@ -1,14 +1,6 @@
 export const BUTTON_ARR = [
   {
     id: 1,
-    title: "카카오",
-    img: "icon_kakao_black",
-    onClick: "handleKakaoLogin",
-    color: "#fee500",
-    font_color: "#222222",
-  },
-  {
-    id: 2,
     title: "네이버",
     img: "icon_naver_white",
     href: "#naver",
@@ -16,7 +8,7 @@ export const BUTTON_ARR = [
     font_color: "#ffffff",
   },
   {
-    id: 3,
+    id: 2,
     title: "이메일",
     img: "icon_email_gray",
     href: "#email",
