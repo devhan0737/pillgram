@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { BUTTON_ARR } from "../assets/static-values";
-
 // --------------------------------------------------------------------------
 const Container = styled.div`
   display: flex;

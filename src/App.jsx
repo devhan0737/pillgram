@@ -9,6 +9,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Footer from "./components/footer/Footer";
 import ZodSignupPage from "./_root/ZodSignupPage";
+import BrandStory from "./_root/BrandStory/BrandStory";
 
 const Wrapper = styled.div`
   display: flex;
@@ -24,6 +25,7 @@ function App() {
         <Route path="/" element={<Contents />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/SignupPage" element={<ZodSignupPage />} />
+        <Route path="/brand-story" element={<BrandStory />} />
       </Routes>
       <Wrapper>
         <Header />

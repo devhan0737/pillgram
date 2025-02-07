@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
-  display: ${(props) => (props.hide ? "none" : "flex")};
+  display: ${(props) => (props.hide === "true" ? "none" : "flex")};
   padding: 36px 24px;
   position: relative;
   top: 64px;
@@ -53,7 +53,7 @@ const Footer = () => {
   );
 
   return (
-    <Container hide={hideFooter}>
+    <Container hide={hideFooter ? "true" : "false"}>
       <FooterContents>
         <FooterInfo>
           <li>

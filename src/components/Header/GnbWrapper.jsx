@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { IsDesktop, mq } from "../../lib/media-query/mediaQuery";
+import { MENUITEMS } from "../../assets/menu-items";
 
 const GnbWrap = styled.div`
   position: absolute;
@@ -8,10 +9,10 @@ const GnbWrap = styled.div`
   left: 0;
   width: 100%;
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
-  transform: ${({ isOpen }) =>
-    isOpen ? "translateY(0)" : "translateY(-10px)"};
-  opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
-  pointer-events: ${({ isOpen }) => (isOpen ? "auto" : "none")};
+  transform: ${({ isopen }) =>
+    isopen === "true" ? "translateY(0)" : "translateY(-10px)"};
+  opacity: ${({ isopen }) => (isopen === "true" ? 1 : 0)};
+  pointer-events: ${({ isopen }) => (isopen === "true" ? "auto" : "none")};
   z-index: 9999;
   box-sizing: border-box;
   background: #fff;
@@ -80,27 +81,19 @@ const GnbWrapper = ({ isOpen }) => {
     setActiveIndex(index); // 클릭한 항목의 인덱스를 설정
   };
 
-  // 메뉴 항목을 배열로 정의
-  const menuItems = [
-    "맞춤영양제 추천받기",
-    "영양제 정보",
-    "고객후기",
-    "브랜드 스토리",
-    "필그램 소식",
-    "선물하기",
-  ];
-
   return (
-    <GnbWrap isOpen={isOpen}>
+    <GnbWrap isopen={isOpen ? "true" : "false"}>
       <Gnb>
-        {menuItems.map((item, index) => (
-          <li key={index}>
+        {MENUITEMS.map((item, index) => (
+          <li key={item.id}>
             <a
-              onClick={() => handleClick(index)}
-              data-active={activeIndex === index} // React가 허용하는 data-* 속성 사용
-              href="#"
+              href={item.href}
+              onClick={(e) => {
+                handleClick(index);
+              }}
+              data-active={activeIndex === index}
             >
-              {item}
+              {item.text}
             </a>
           </li>
         ))}

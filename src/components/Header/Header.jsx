@@ -12,7 +12,7 @@ import { useLocation } from "react-router-dom";
 
 const Container = styled.header`
   max-width: 100%;
-  display: ${(props) => (props.hide ? "none" : "flex")};
+  display: ${(props) => (props.hide === "true" ? "none" : "flex")};
   justify-content: center;
   height: 64px;
   width: 100%;
@@ -48,7 +48,6 @@ const Logo = styled.h1`
 
 const Header = () => {
   const location = useLocation();
-  console.log(location.pathname);
 
   const hideFooter = ["/login", "/SignupPage"].some((path) =>
     location.pathname.includes(path)
@@ -61,7 +60,7 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   return (
-    <Container hide={hideFooter}>
+    <Container hide={hideFooter ? "true" : "false"}>
       <Nav>
         <Logo>
           <a href="/"></a>

@@ -3,7 +3,7 @@ export const BUTTON_ARR = [
     id: 1,
     title: "카카오",
     img: "icon_kakao_black",
-    href: "#kakao",
+    onClick: "handleKakaoLogin",
     color: "#fee500",
     font_color: "#222222",
   },
