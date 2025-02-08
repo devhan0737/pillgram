@@ -1,36 +1,51 @@
-import React from "react";
-import NaverLogin from "react-naver-login";
+import React, { useEffect } from "react";
+import styled from "styled-components";
 
+const Container = styled.div`
+  width: 100%;
+`;
+const CustomButton = styled.button`
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  border: 1px solid #03c75a;
+  color: #fff;
+  width: 100%;
+  padding: 14px 12px 12px;
+  background: #03c75a;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #02b053;
+  }
+`;
 const SocialNaver = () => {
-  const handleSuccess = (naverUser) => {
-    console.log("네이버 로그인 성공!", naverUser);
-    console.log("네이버 유저 정보:", naverUser);
-  };
+  useEffect(() => {
+    const { naver } = window;
 
-  const handleFailure = (error) => {
-    console.error("네이버 로그인 실패:", error);
+    const naverLogin = new naver.LoginWithNaverId({
+      clientId: import.meta.env.VITE_NAVER_JAVASCRIPT_KEY, // 네이버에서 발급받은 Client ID
+      callbackUrl: "http://localhost:5173/", // 설정한 Callback URL
+      isPopup: false,
+      loginButton: { display: "none" },
+    });
+
+    naverLogin.init();
+  }, []);
+
+  const handleNaverLogin = () => {
+    document.getElementById("naverIdLogin").firstChild.click(); // 네이버 기본 버튼 클릭
   };
 
   return (
-    <NaverLogin
-      clientId={import.meta.env.VITE_NAVER_JAVASCRIPT_KEY}
-      callbackUrl="http://localhost:5173/" // 설정한 콜백 URL
-      render={(props) => (
-        <button
-          onClick={props.onClick}
-          style={{
-            backgroundColor: "#03C75A",
-            color: "#fff",
-            padding: "10px 20px",
-            borderRadius: "5px",
-          }}
-        >
-          네이버 로그인
-        </button>
-      )}
-      onSuccess={handleSuccess}
-      onFailure={handleFailure}
-    />
+    <Container>
+      <div id="naverIdLogin" style={{ display: "none" }}></div>
+      <CustomButton onClick={handleNaverLogin}>
+        <img src="/public/icon_naver_white.svg" alt="" />
+        네이버로 계속하기
+      </CustomButton>
+    </Container>
   );
 };
 
