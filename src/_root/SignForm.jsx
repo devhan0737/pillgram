@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { INPUT_FIELD_ARR } from "../assets/join-static-values";
 import { zodResolver } from "@hookform/resolvers/zod";
-import SocialKakao from "./SocialKakao";
 import { SIGNUP_ZOD } from "../lib/zod/zodResolver";
+import AgreementForm from "./Agree";
 
 const Container = styled.div`
   max-width: 430px;
@@ -12,6 +12,7 @@ const Container = styled.div`
   padding: 0 20px;
   box-sizing: border-box;
 `;
+
 const FormBox = styled.form`
   width: 100%;
   display: flex;
@@ -40,12 +41,19 @@ const InputField = styled.div`
     top: 8px;
     left: 16px;
     font-size: 12px;
-    color: ${({ hasError }) => (hasError ? "red" : "black")};
+    color: #aaaaaa;
+  }
+
+  span {
+    color: red;
+    font-size: 1.4rem;
+    margin-top: 4px;
   }
 `;
 const InputWrapper = styled.div`
   position: relative;
   width: 100%;
+
   input {
     position: relative;
     border: 1px solid ${({ hasError }) => (hasError ? "red" : "#aaaaaa")};
@@ -55,6 +63,7 @@ const InputWrapper = styled.div`
     height: 56px;
     padding: 18px 24px 6px;
     transition: border-color 0.3s ease-in-out;
+
     &:focus {
       border: 1px solid green;
       outline: none;
@@ -74,11 +83,6 @@ const InputWrapper = styled.div`
     color: #fff;
     background-color: #aaaaaa;
   }
-  span {
-    color: red;
-    font-size: 1.4rem;
-    margin-top: 4px;
-  }
 `;
 
 // ----------------------본문-------------------------------------------
@@ -87,6 +91,8 @@ const SignForm = () => {
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -96,15 +102,18 @@ const SignForm = () => {
       confirmPassword: "",
       phone: "",
       birth: "",
+      checkbox: "",
     },
+
     resolver: zodResolver(SIGNUP_ZOD),
-    mode: "onChange",
+    mode: "onBlur",
   });
 
+  // form 데이터 제출 기능
   const onSubmit = (data) => {
     console.log("폼 데이터:", data); // 여기서 콘솔 로그 확인
 
-    alert("회원가입이 완료되었습니다.");
+    alert("회원가입이 완료되었습니다."); // 회원가입 성공시 뜨는 알림창
   };
 
   return (
@@ -114,14 +123,17 @@ const SignForm = () => {
           const hasError = errors[field.id];
 
           return (
-            <InputField key={field.id} isvalid={hasError}>
-              <InputWrapper isvalid={hasError}>
+            <InputField key={field.id} hasError={hasError}>
+              <InputWrapper hasError={hasError}>
                 <input
                   id={field.id}
                   type={field.type}
                   required={true}
                   placeholder=""
-                  {...register(field.id, field.validation)}
+                  {...register(field.id, {
+                    required: "값을 입력해주세요",
+                    ...field.validation,
+                  })}
                 />
 
                 <label htmlFor={field.id}>{field.label}</label>
@@ -134,13 +146,8 @@ const SignForm = () => {
           );
         })}
 
-        <input type="checkbox" />
-
-        <input type="radio" />
-
+        <AgreementForm register={register} setValue={setValue} watch={watch} />
         <button type="submit">가입하기</button>
-
-        <SocialKakao />
       </FormBox>
     </Container>
   );

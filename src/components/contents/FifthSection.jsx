@@ -63,11 +63,12 @@ const StyledSwiper = styled(Swiper)`
     img {
       width: 100%;
       height: 270px;
-      border-radius: 32px;
+      border-radius: 26px;
       object-fit: contain;
 
       ${mq("desktop")} {
         width: 100%;
+        border-radius: 32px;
       }
     }
   }
@@ -230,9 +231,9 @@ const FifthSection = () => {
 
         <StyledSwiper
           modules={[Navigation, Autoplay, Pagination]}
-          spaceBetween={0}
+          spaceBetween={10}
           slidesPerGroup={1}
-          slidesPerView={1.3}
+          slidesPerView={1.4}
           loop={true}
           // autoplay={{
           //   delay: 2000,

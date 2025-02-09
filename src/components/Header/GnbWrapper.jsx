@@ -5,7 +5,7 @@ import { MENUITEMS } from "../../assets/menu-items";
 
 const GnbWrap = styled.div`
   position: absolute;
-  top: 64px;
+  top: 65px;
   left: 0;
   width: 100%;
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
