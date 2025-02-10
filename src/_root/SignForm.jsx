@@ -102,7 +102,10 @@ const SignForm = () => {
       confirmPassword: "",
       phone: "",
       birth: "",
-      checkbox: "",
+      allAgree: false,
+      terms: false,
+      personalInfo: false,
+      marketing: false,
     },
 
     resolver: zodResolver(SIGNUP_ZOD),
