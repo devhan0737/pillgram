@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { AGREEMENTS } from "../assets/small-Check-Box";
 
 const checkedImg = "/public/agree_chk_on.svg";
-const uncheckedImg = "/public/agree_chk.svg"; // 비활성화된 이미지 경로가 잘못되어 있어 수정
+const uncheckedImg = "/public/agree_chk.svg";
+const singleUncheckedImg = "/public/survey_chk.svg";
+const singleCheckedImg = "/public/survey_chk_on.svg";
 
 const FormContainer = styled.div`
   display: flex;
@@ -13,7 +15,10 @@ const FormContainer = styled.div`
 `;
 
 const TopCheckbox = styled.div`
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   box-sizing: border-box;
   font-weight: 700;
   line-height: 32px;
@@ -22,13 +27,38 @@ const TopCheckbox = styled.div`
   border-radius: 16px;
   padding: 16px;
   cursor: pointer;
+  label {
+    font-weight: 700;
+    line-height: 32px;
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+`;
+const AllCheckBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+const BottomCheckBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 `;
 const Checkbox = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
   font-size: 14px;
   cursor: pointer;
+`;
+const EachCheckBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+const HiddenCheckbox = styled.input`
+  display: none;
 `;
 
 const Divider = styled.hr`
@@ -37,63 +67,65 @@ const Divider = styled.hr`
 `;
 
 const CheckboxImage = styled.img`
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
 `;
+
+const ViewText = styled.span`
+  color: #888888;
+  cursor: pointer;
+  font-size: 14px;
+`;
+
 const AgreementForm = ({ register, setValue, watch }) => {
-  // 모든 체크박스가 체크되었는지 확인
   const allChecked = AGREEMENTS.every(({ id }) => watch(id));
 
-  // 일부 체크박스가 체크되었는지 확인
-  const someChecked = AGREEMENTS.some(({ id }) => watch(id));
-
-  // "모두 동의하기" 체크박스 클릭 시 모든 체크박스를 변경하는 함수
   const handleAllAgree = () => {
-    const newState = !watch("allAgree"); // 현재 상태 반전
+    const newState = !watch("allAgree");
     AGREEMENTS.forEach(({ id }) => {
-      setValue(id, newState, { shouldValidate: true }); // 모든 체크박스 변경 + 즉시 검증
+      setValue(id, newState, { shouldValidate: true });
     });
-    setValue("allAgree", newState, { shouldValidate: true }); // "모두 동의하기" 값도 함께 변경
+    setValue("allAgree", newState, { shouldValidate: true });
   };
 
-  // 개별 체크박스가 변경될 때 "모두 동의하기" 체크 여부 업데이트
   useEffect(() => {
-    const isAllChecked = AGREEMENTS.every(({ id }) => watch(id)); // 모든 항목 체크 확인
-    setValue("allAgree", isAllChecked); // "모두 동의하기" 업데이트
-  }, [AGREEMENTS.map(({ id }) => watch(id))]); // watch 값들만 의존성 배열에 추가
+    const isAllChecked = AGREEMENTS.every(({ id }) => watch(id));
+    setValue("allAgree", isAllChecked);
+  }, [AGREEMENTS.map(({ id }) => watch(id))]);
 
   return (
     <FormContainer>
       <Divider />
 
       <TopCheckbox onClick={handleAllAgree}>
-        <CheckboxImage
-          src={watch("allAgree") ? checkedImg : uncheckedImg}
-          alt="모두 동의하기"
-          onClick={(e) => {
-            e.stopPropagation();
-            handleAllAgree();
-          }}
-        />
-
-        <label>모두 동의하기</label>
+        <AllCheckBox>
+          <CheckboxImage
+            src={watch("allAgree") ? checkedImg : uncheckedImg}
+            alt="모두 동의하기"
+          />
+          <label>모두 동의하기</label>
+        </AllCheckBox>
       </TopCheckbox>
 
-      {AGREEMENTS.map(({ id, label }) => (
-        <Checkbox key={id}>
-          <input
-            type="checkbox"
-            id={id}
-            {...register(id)}
-            onChange={(e) => {
-              setValue(id, e.target.checked, { shouldValidate: true }); // 개별 체크박스 상태 변경 시 적용
-            }}
-          />
-
-          <label htmlFor={id}>{label}</label>
-        </Checkbox>
-      ))}
+      <BottomCheckBox>
+        {AGREEMENTS.map(({ id, label }) => (
+          <Checkbox
+            key={id}
+            onClick={() => setValue(id, !watch(id), { shouldValidate: true })}
+          >
+            <EachCheckBox>
+              <HiddenCheckbox type="checkbox" id={id} {...register(id)} />
+              <CheckboxImage
+                src={watch(id) ? singleCheckedImg : singleUncheckedImg}
+                alt={label}
+              />
+              <label htmlFor={id}>{label}</label>
+            </EachCheckBox>
+            <ViewText>보기</ViewText>
+          </Checkbox>
+        ))}
+      </BottomCheckBox>
     </FormContainer>
   );
 };
