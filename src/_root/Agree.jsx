@@ -42,6 +42,7 @@ const AllCheckBox = styled.div`
 const BottomCheckBox = styled.div`
   display: flex;
   flex-direction: column;
+  padding-top: 20px;
   gap: 24px;
 `;
 const Checkbox = styled.div`
@@ -61,11 +62,10 @@ const HiddenCheckbox = styled.input`
   display: none;
 `;
 
-const Divider = styled.hr`
-  width: 100%;
-  border: 0.5px solid #ddd;
+const HeaderText = styled.h2`
+  font-size: 1.8rem;
+  font-weight: 700;
 `;
-
 const CheckboxImage = styled.img`
   width: 24px;
   height: 24px;
@@ -75,7 +75,7 @@ const CheckboxImage = styled.img`
 const ViewText = styled.span`
   color: #888888;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 1.5rem;
 `;
 
 const AgreementForm = ({ register, setValue, watch }) => {
@@ -96,7 +96,7 @@ const AgreementForm = ({ register, setValue, watch }) => {
 
   return (
     <FormContainer>
-      <Divider />
+      <HeaderText>정보 이용 동의</HeaderText>
 
       <TopCheckbox onClick={handleAllAgree}>
         <AllCheckBox>

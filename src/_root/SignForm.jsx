@@ -85,6 +85,22 @@ const InputWrapper = styled.div`
   }
 `;
 
+const JoinButton = styled.button`
+  margin: 24px 0;
+  width: 100%;
+  height: 52px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 20px;
+  text-align: center;
+  padding: 16px;
+  background: #2aad5c;
+  border: 1px solid #2aad5c;
+  border-radius: 8px;
+  box-sizing: border-box;
+`;
+
 // ----------------------본문-------------------------------------------
 
 const SignForm = () => {
@@ -150,7 +166,7 @@ const SignForm = () => {
         })}
 
         <AgreementForm register={register} setValue={setValue} watch={watch} />
-        <button type="submit">가입하기</button>
+        <JoinButton type="submit">가입하기</JoinButton>
       </FormBox>
     </Container>
   );

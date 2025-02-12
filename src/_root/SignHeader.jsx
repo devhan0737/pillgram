@@ -3,10 +3,13 @@ import styled from "styled-components";
 
 const Container = styled.div`
   position: sticky;
+  background-color: #fff;
   top: 0;
   left: 0;
   width: 100%;
+  max-width: 430px;
   height: 68px;
+  z-index: 400;
 `;
 const ContentsWrapper = styled.div`
   height: 100%;

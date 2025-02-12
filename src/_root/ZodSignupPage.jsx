@@ -12,7 +12,6 @@ const Container = styled.div`
   align-items: center;
 `;
 const ContentsWrapper = styled.div`
-  margin: 56px 0 0 0;
   max-width: 430px;
   width: 100%;
 `;

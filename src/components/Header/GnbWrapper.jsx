@@ -55,42 +55,54 @@ const Gnb = styled.ul`
       display: flex;
       align-items: center;
     }
+
     a {
       width: 100%;
       display: block;
       line-height: 30px;
       transition: color 0.3s ease-in-out;
       color: black;
+
       &[data-active="true"] {
-        color: #2aad5c; /* 클릭된 상태일 때 색상 */
+        color: #2aad5c;
       }
+
       ${mq("desktop")} {
         font-size: 1.8rem;
       }
-      &:hover a {
-        color: #2aad5c; /* hover 시 색상 */
+
+      &:hover {
+        color: #2aad5c;
       }
+    }
+  }
+
+  /* 데스크톱에서 숨길 항목 처리 */
+  .desktop-hidden {
+    ${mq("desktop")} {
+      display: none;
     }
   }
 `;
 
 const GnbWrapper = ({ isOpen }) => {
-  const [activeIndex, setActiveIndex] = useState(null); // 여러 항목을 관리할 수 있도록 상태 수정
+  const [activeIndex, setActiveIndex] = useState(null);
 
   const handleClick = (index) => {
-    setActiveIndex(index); // 클릭한 항목의 인덱스를 설정
+    setActiveIndex(index);
   };
 
   return (
     <GnbWrap isopen={isOpen ? "true" : "false"}>
       <Gnb>
         {MENUITEMS.map((item, index) => (
-          <li key={item.id}>
+          <li
+            key={item.id}
+            className={item.display === "none" ? "desktop-hidden" : ""} // 데스크톱에서 숨김
+          >
             <a
               href={item.href}
-              onClick={(e) => {
-                handleClick(index);
-              }}
+              onClick={() => handleClick(index)}
               data-active={activeIndex === index}
             >
               {item.text}
