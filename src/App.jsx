@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 
 function App() {
   return (
-    <Router>
+    <div>
       <Routes>
         <Route path="/" element={<Contents />} />
         <Route path="/login" element={<LoginPage />} />
@@ -31,7 +31,7 @@ function App() {
         <Header />
         <Footer />
       </Wrapper>
-    </Router>
+    </div>
   );
 }
 

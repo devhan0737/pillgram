@@ -4,7 +4,7 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 
 createRoot(document.getElementById("root")).render(
-  <BrowserRouter basename={process.env.PUBLIC_URL}>
+  <BrowserRouter basename={import.meta.env.BASE_URL}>
     <StrictMode>
       <App />
     </StrictMode>
