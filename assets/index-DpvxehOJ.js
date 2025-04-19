@@ -204,7 +204,7 @@ Please change the parent <Route path="${w}"> to <Route path="${w==="/"?"*":`${w}
     align-items: center;
     background: url("../../public/logo1.svg") no-repeat 50% 50%;
   }
-`,bx=()=>{const n=er();useNavigate();const t=["/login","/SignupPage"].some(o=>n.pathname.includes(o)),[i,s]=N.useState(!1),l=()=>{console.log("Toggling menu",i),s(!i)};return x.jsxs(_x,{hide:t?"true":"false",children:[x.jsx(kx,{isOpen:i,onClick:l}),x.jsxs(Ex,{children:[x.jsx(Tx,{children:x.jsx(Oi,{to:"/",children:x.jsx("img",{src:cd,alt:"로고이미지"})})}),x.jsx(Qv,{isOpen:i}),x.jsx(Cv,{children:x.jsx(H0,{onClick:l})}),x.jsx(Sv,{children:x.jsx(H0,{onClick:l})}),x.jsx(co,{children:x.jsx(Cx,{})})]})]})},Px=G.button`
+`,bx=()=>{const n=er(),t=["/login","/SignupPage"].some(o=>n.pathname.includes(o)),[i,s]=N.useState(!1),l=()=>{console.log("Toggling menu",i),s(!i)};return x.jsxs(_x,{hide:t?"true":"false",children:[x.jsx(kx,{isOpen:i,onClick:l}),x.jsxs(Ex,{children:[x.jsx(Tx,{children:x.jsx(Oi,{to:"/",children:x.jsx("img",{src:cd,alt:"로고이미지"})})}),x.jsx(Qv,{isOpen:i}),x.jsx(Cv,{children:x.jsx(H0,{onClick:l})}),x.jsx(Sv,{children:x.jsx(H0,{onClick:l})}),x.jsx(co,{children:x.jsx(Cx,{})})]})]})},Px=G.button`
   padding: 0;
   display: flex;
   align-items: center;
