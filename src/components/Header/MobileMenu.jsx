@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { mq, IsDesktop } from "../../lib/media-query/mediaQuery";
+import { MenuLine } from "../../assets/theme";
 
 const MobileMenuWrapper = styled.div`
   display: inline-block;
@@ -28,7 +29,7 @@ const MobileMenu = ({ onClick }) => {
   return (
     <MobileMenuWrapper onClick={onClick}>
       <a href="#">
-        <img src="/public/menu-line.svg" alt="" />
+        <img src={MenuLine} alt="메뉴 아이콘" />
       </a>
     </MobileMenuWrapper>
   );

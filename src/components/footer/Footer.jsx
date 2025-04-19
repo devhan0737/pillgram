@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+import { Blog, google, instar, Kakao, youtube } from "../../assets/theme";
 
 const Container = styled.div`
   display: ${(props) => (props.hide === "true" ? "none" : "flex")};
@@ -80,27 +81,27 @@ const Footer = () => {
         <SnsIcon>
           <li>
             <a href="#">
-              <img src="/public/icon_sns_blog.svg" alt="블로그 아이콘" />
+              <img src={Blog} alt="블로그 아이콘" />
             </a>
           </li>
           <li>
             <a href="#">
-              <img src="/public/icon_sns_kakao.svg" alt="카카오톡 아이콘" />
+              <img src={Kakao} alt="카카오톡 아이콘" />
             </a>
           </li>
           <li>
             <a href="#">
-              <img src="/public/icon_sns_instar.svg" alt="인스타 아이콘" />
+              <img src={instar} alt="인스타 아이콘" />
             </a>
           </li>
           <li>
             <a href="#">
-              <img src="/public/icon_sns_youtube.svg" alt="유튜브 아이콘" />
+              <img src={youtube} alt="유튜브 아이콘" />
             </a>
           </li>
           <li>
             <a href="#">
-              <img src="/public/icon_sns_google.svg" alt="구글 아이콘" />
+              <img src={google} alt="구글 아이콘" />
             </a>
           </li>
         </SnsIcon>

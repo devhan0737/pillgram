@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { LogoIcon } from "../assets/theme";
 
 const Container = styled.div`
   position: sticky;
@@ -37,7 +38,7 @@ const SignHeader = () => {
       <ContentsWrapper>
         <Logo>
           <a href="/">
-            <img src="/public/logo1.svg" alt="" />
+            <img src={LogoIcon} alt="로고 아이콘" />
           </a>
         </Logo>
       </ContentsWrapper>

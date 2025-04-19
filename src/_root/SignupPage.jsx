@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { LogoIcon } from "../assets/theme";
 
 const Container = styled.div`
   width: 100%;
@@ -180,9 +181,6 @@ const SignupPage = () => {
   return (
     <Container>
       <SignupWrapper>
-        <MainLogo>
-          <img src="/logo1.svg" alt="" />
-        </MainLogo>
         <JoinSection>
           <h2>회원가입</h2>
           <p>처음이신 고객님을 위해 가입을 진행합니다</p>

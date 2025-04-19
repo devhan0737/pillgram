@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Shoppingbag, user } from "../../assets/theme";
 
 const Container = styled.div`
   width: auto;
@@ -23,12 +24,12 @@ const DesktopMenu = () => {
       <IconWrap>
         <li>
           <a href="#">
-            <img src="../../../public/shoppingbag.svg" alt="" />
+            <img src={Shoppingbag} alt="장바구니 아이콘" />
           </a>
         </li>
         <li>
-          <a href="/login">
-            <img src="../../../public/user.svg" alt="" />
+          <a href="/pillgram/login">
+            <img src={user} alt="마이페이지 아이콘" />
           </a>
         </li>
       </IconWrap>

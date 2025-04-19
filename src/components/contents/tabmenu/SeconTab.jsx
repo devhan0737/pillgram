@@ -4,6 +4,7 @@ import Button from "./../../button/Button";
 import { mq, IsDesktop } from "./../../../lib/media-query/mediaQuery";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
+import { Routine1, Routine2, Routine3 } from "../../../assets/theme";
 
 const Container = styled.div`
   max-width: 380px;
@@ -166,7 +167,7 @@ const SeconTab = () => {
             }}
           >
             <SwiperSlide>
-              <img src="/public/img_routine_01.png" alt="" />
+              <img src={Routine1} alt="" />
               <SwiperText>
                 <p>오전 섭취</p>
                 <TextBox>
@@ -185,7 +186,7 @@ const SeconTab = () => {
               </SwiperText>
             </SwiperSlide>
             <SwiperSlide>
-              <img src="/public/img_routine_02.png" alt="" />
+              <img src={Routine2} alt="" />
               <SwiperText>
                 <p>오전 섭취</p>
                 <TextBox>
@@ -206,7 +207,7 @@ const SeconTab = () => {
               </SwiperText>
             </SwiperSlide>
             <SwiperSlide>
-              <img src="/public/img_routine_03.png" alt="" />
+              <img src={Routine3} alt="" />
               <SwiperText>
                 <p>오전 섭취</p>
                 <TextBox>

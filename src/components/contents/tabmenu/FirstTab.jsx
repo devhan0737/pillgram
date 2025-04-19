@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Button from "./../../button/Button";
 import { mq, IsDesktop } from "./../../../lib/media-query/mediaQuery";
+import { analysis, counselor, magicStick } from "../../../assets/theme";
 
 const Container = styled.div`
   max-width: 380px;
@@ -121,21 +122,21 @@ const FirstTab = () => {
             <span>1</span>
             <div>
               <p>의료정보로 정확한 건강 분석</p>
-              <img src="/public/icon_analysis.svg" alt="" />
+              <img src={analysis} alt="" />
             </div>
           </li>
           <li>
             <span>2</span>
             <div>
               <p>나만의 건강 고민 체크</p>
-              <img src="/public/icon_magicStick.svg" alt="" />
+              <img src={magicStick} alt="" />
             </div>
           </li>
           <li>
             <span>3</span>
             <div>
               <p>전문가와 1:1 상담</p>
-              <img src="/public/icon_counselor.svg" alt="" />
+              <img src={counselor} alt="" />
             </div>
           </li>
         </RigthContent>

@@ -2,11 +2,10 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { AGREEMENTS } from "../assets/small-Check-Box";
+import { check, checked } from "../assets/theme";
 
 const checkedImg = "/public/agree_chk_on.svg";
 const uncheckedImg = "/public/agree_chk.svg";
-const singleUncheckedImg = "/public/survey_chk.svg";
-const singleCheckedImg = "/public/survey_chk_on.svg";
 
 const FormContainer = styled.div`
   display: flex;
@@ -101,7 +100,7 @@ const AgreementForm = ({ register, setValue, watch }) => {
       <TopCheckbox onClick={handleAllAgree}>
         <AllCheckBox>
           <CheckboxImage
-            src={watch("allAgree") ? checkedImg : uncheckedImg}
+            src={watch("allAgree") ? check : checked}
             alt="모두 동의하기"
           />
           <label>모두 동의하기</label>
@@ -116,10 +115,7 @@ const AgreementForm = ({ register, setValue, watch }) => {
           >
             <EachCheckBox>
               <HiddenCheckbox type="checkbox" id={id} {...register(id)} />
-              <CheckboxImage
-                src={watch(id) ? singleCheckedImg : singleUncheckedImg}
-                alt={label}
-              />
+              <CheckboxImage src={watch(id) ? check : checked} alt={label} />
               <label htmlFor={id}>{label}</label>
             </EachCheckBox>
             <ViewText>보기</ViewText>

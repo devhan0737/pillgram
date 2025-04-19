@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { BUTTON_ARR } from "../assets/static-values";
 import SocialKakao from "./SocialKakao";
 import SocialNaver from "./SocialNaver";
+import { iconEmail, LogoIcon } from "../assets/theme";
 // --------------------------------------------------------------------------
 const Container = styled.div`
   display: flex;
@@ -82,8 +83,7 @@ const Button = styled.button`
 const ToggleSection = styled.div`
   padding-top: 24px;
   width: 100%;
-  display: ${(props) =>
-    props.isVisible ? "flex" : "none"}; // 수정 3: 조건부 display 처리
+  display: ${(props) => (props.isVisible ? "flex" : "none")};
   flex-direction: column;
   justify-content: center;
   gap: 12px;
@@ -99,14 +99,13 @@ const IdInput = styled.input`
   line-height: 22px;
   box-sizing: border-box;
   background: #fff;
-  border: 1px solid ${(props) => (props.error ? "red" : "#dddddd")};
+  border: 1px solid ${(props) => (props.onError ? "red" : "#dddddd")};
   border-radius: 8px;
   transition: all 0.1s ease-in-out;
 
   &:focus {
-    border-color: ${(props) =>
-      props.error ? "red" : "#2aad5c"}; // 에러 시 빨간색 유지, 아니면 파란색
-    outline: none; // 기본 브라우저 outline 제거
+    border-color: ${(props) => (props.onError ? "red" : "#2aad5c")};
+    outline: none;
   }
 `;
 
@@ -120,14 +119,13 @@ const PwInput = styled.input`
   line-height: 22px;
   box-sizing: border-box;
   background: #fff;
-  border: 1px solid ${(props) => (props.error ? "red" : "#dddddd")};
+  border: 1px solid ${(props) => (props.onError ? "red" : "#dddddd")};
   border-radius: 8px;
   transition: all 0.1s ease-in-out;
 
   &:focus {
-    border-color: ${(props) =>
-      props.error ? "red" : "#2aad5c"}; // 에러 시 빨간색 유지, 아니면 파란색
-    outline: none; // 기본 브라우저 outline 제거
+    border-color: ${(props) => (props.onError ? "red" : "#2aad5c")};
+    outline: none;
   }
 `;
 
@@ -140,7 +138,7 @@ const InputWrapper = styled.div`
     position: absolute;
     top: 20px;
     left: 30px;
-    color: ${(props) => (props.error ? "red" : "#757575")};
+    color: ${(props) => (props.onError ? "red" : "#757575")};
   }
 
   input:focus + label,
@@ -282,7 +280,7 @@ const LoginPage = () => {
       // 비밀번호 입력칸이 비어 있을 경우
       isValid = false; // isValid를 false로 변환
       newErrors.userPassword = "비밀번호를 입력해주세요."; // 비밀번호가 비어있으면 오류 메시지
-    } else if (userPassword.length < 4 || value.length > 20) {
+    } else if (userPassword.length < 4 || userPassword.length > 20) {
       //비밀번호가 짧은 경우
       isValid = false;
       newErrors.userPassword = "비밀번호가 너무 짧습니다";
@@ -327,12 +325,12 @@ const LoginPage = () => {
         <LoginCard>
           <MainLogo>
             <a href="/">
-              <img src="/logo1.svg" alt="로고" />
+              <img src={LogoIcon} alt="로고" />
             </a>
             <p>필요한 것만, 필요한 만큼만</p>
           </MainLogo>
 
-          <Login action="#" method="post" onSubmit={handleSubmit}>
+          <Login method="post" onSubmit={handleSubmit}>
             <ButtonWrapper>
               <SocialKakao />
               <SocialNaver />
@@ -345,7 +343,7 @@ const LoginPage = () => {
                     item.title === "이메일" ? handleEmailLoginToggle : null
                   }
                 >
-                  <img src={`/${item.img}.svg`} alt="아이콘" />
+                  <img src={iconEmail} alt="아이콘" />
 
                   {
                     <a href={item.href} onClick={item.onClick}>
@@ -405,7 +403,7 @@ const LoginPage = () => {
                 <a href="#">비밀번호 재설정</a>
               </li>
               <li>
-                <a href="/SignupPage">회원가입</a>
+                <a href="/pillgram/SignupPage">회원가입</a>
               </li>
             </About>
           </Login>

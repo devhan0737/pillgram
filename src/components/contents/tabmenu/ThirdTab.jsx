@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Button from "./../../button/Button";
 import { mq, IsDesktop } from "./../../../lib/media-query/mediaQuery";
+import { IllPack } from "../../../assets/theme";
 
 const Container = styled.div`
   max-width: 380px;
@@ -119,7 +120,7 @@ const ThirdTab = () => {
       </LeftContentWrap>
       <RightContentWrap>
         <RigthContent>
-          <img src="/public/img_pack_B (1).png" alt="" />
+          <img src={IllPack} alt="" />
         </RigthContent>
       </RightContentWrap>
     </Container>

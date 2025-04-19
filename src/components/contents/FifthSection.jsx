@@ -4,6 +4,7 @@ import { mq } from "../../lib/media-query/mediaQuery";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, Pagination } from "swiper/modules";
 import Button from "../button/Button";
+import { fivestar, review1, review2, review3 } from "../../assets/theme";
 
 const Container = styled.div`
   max-width: 380px;
@@ -161,10 +162,20 @@ const ReviewTop = styled.div`
 const FifthSection = () => {
   const slideArr = [
     {
+      id: 1,
+      star: "4.9",
+      stack: "9",
+      title: "저에게는 인생템입니다.",
+      img: review1,
+      description:
+        "꾸준히 먹어야 효과를 보게 되는 약들인데 개별 포장에 알림도 되고 너무너무 좋은 상품인 것 같아요. 한 가지 제품을 박스로 사야 하는 번거로움에서 벗어나서 하루에 섭취해야만 하는 약이 한 봉씩 봉해져 있으니 인생템입니다~~~",
+    },
+    {
       id: 2,
       star: "4.9",
       stack: "9",
       title: "저에게는 인생템입니다.",
+      img: review2,
       description:
         "꾸준히 먹어야 효과를 보게 되는 약들인데 개별 포장에 알림도 되고 너무너무 좋은 상품인 것 같아요. 한 가지 제품을 박스로 사야 하는 번거로움에서 벗어나서 하루에 섭취해야만 하는 약이 한 봉씩 봉해져 있으니 인생템입니다~~~",
     },
@@ -173,6 +184,7 @@ const FifthSection = () => {
       star: "4.9",
       stack: "9",
       title: "저에게는 인생템입니다.",
+      img: review3,
       description:
         "꾸준히 먹어야 효과를 보게 되는 약들인데 개별 포장에 알림도 되고 너무너무 좋은 상품인 것 같아요. 한 가지 제품을 박스로 사야 하는 번거로움에서 벗어나서 하루에 섭취해야만 하는 약이 한 봉씩 봉해져 있으니 인생템입니다~~~",
     },
@@ -181,6 +193,7 @@ const FifthSection = () => {
       star: "4.9",
       stack: "9",
       title: "저에게는 인생템입니다.",
+      img: review1,
       description:
         "꾸준히 먹어야 효과를 보게 되는 약들인데 개별 포장에 알림도 되고 너무너무 좋은 상품인 것 같아요. 한 가지 제품을 박스로 사야 하는 번거로움에서 벗어나서 하루에 섭취해야만 하는 약이 한 봉씩 봉해져 있으니 인생템입니다~~~",
     },
@@ -189,30 +202,25 @@ const FifthSection = () => {
       star: "4.9",
       stack: "9",
       title: "저에게는 인생템입니다.",
+      img: review2,
       description:
         "꾸준히 먹어야 효과를 보게 되는 약들인데 개별 포장에 알림도 되고 너무너무 좋은 상품인 것 같아요. 한 가지 제품을 박스로 사야 하는 번거로움에서 벗어나서 하루에 섭취해야만 하는 약이 한 봉씩 봉해져 있으니 인생템입니다~~~",
     },
     {
-      id: 5,
+      id: 6,
       star: "4.9",
       stack: "9",
       title: "저에게는 인생템입니다.",
+      img: review3,
       description:
         "꾸준히 먹어야 효과를 보게 되는 약들인데 개별 포장에 알림도 되고 너무너무 좋은 상품인 것 같아요. 한 가지 제품을 박스로 사야 하는 번거로움에서 벗어나서 하루에 섭취해야만 하는 약이 한 봉씩 봉해져 있으니 인생템입니다~~~",
     },
     {
-      id: 2,
+      id: 7,
       star: "4.9",
       stack: "9",
       title: "저에게는 인생템입니다.",
-      description:
-        "꾸준히 먹어야 효과를 보게 되는 약들인데 개별 포장에 알림도 되고 너무너무 좋은 상품인 것 같아요. 한 가지 제품을 박스로 사야 하는 번거로움에서 벗어나서 하루에 섭취해야만 하는 약이 한 봉씩 봉해져 있으니 인생템입니다~~~",
-    },
-    {
-      id: 3,
-      star: "4.9",
-      stack: "9",
-      title: "저에게는 인생템입니다.",
+      img: review1,
       description:
         "꾸준히 먹어야 효과를 보게 되는 약들인데 개별 포장에 알림도 되고 너무너무 좋은 상품인 것 같아요. 한 가지 제품을 박스로 사야 하는 번거로움에서 벗어나서 하루에 섭취해야만 하는 약이 한 봉씩 봉해져 있으니 인생템입니다~~~",
     },
@@ -224,7 +232,7 @@ const FifthSection = () => {
         <ReviewHeader>
           <h2>구독자들의 특별한 이야기</h2>
           <div>
-            <img src="/public/Iconfivestar.svg" alt="" />
+            <img src={fivestar} alt="평점 아이콘" />
             4.9
           </div>
         </ReviewHeader>
@@ -256,10 +264,7 @@ const FifthSection = () => {
           {slideArr.map((item, idx) => {
             return (
               <SwiperSlide key={item.id}>
-                <img
-                  src={`/public/img_review_0${item.id}.png`}
-                  alt={item.star}
-                />
+                <img src={item.img} alt="슬라이드 이미지" />
 
                 <ReviewContent>
                   <ReviewTop>

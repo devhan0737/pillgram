@@ -2,6 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { IsDesktop, mq } from "../../lib/media-query/mediaQuery";
 import Button from "../button/Button";
+import {
+  banBox,
+  bgPack,
+  combination,
+  doctor,
+  magicStick,
+} from "../../assets/theme";
+
 const Container = styled.div`
   max-width: 1232px;
   width: 100%;
@@ -151,7 +159,7 @@ const ThirdSection = () => {
       </TextWrap>
       <ContentsWrap>
         <Pillpack>
-          <img src="/public/bgpack.png" alt="" />
+          <img src={bgPack} alt="약봉지 이미지" />
           <p>
             세상에
             <br />단 하나밖에 없는
@@ -162,7 +170,7 @@ const ThirdSection = () => {
         <OverlapPill>
           <OverlapContentWrap>
             <OverlapTextWrap>
-              <img src="/public/icon_magicStick.svg" alt="" />
+              <img src={magicStick} alt="마법 지팡이 이미지" />
               <TextBox>
                 <h4>드시고 계시는 영양제가 있나요?</h4>
                 <p>
@@ -173,7 +181,7 @@ const ThirdSection = () => {
               </TextBox>
             </OverlapTextWrap>
             <OverlapTextWrap>
-              <img src="/public/icon_ban_combination.svg" alt="" />
+              <img src={combination} alt="퍼즐 이미지" />
               <TextBox>
                 <h4>
                   영양제 조합 수 <span>(5개 기준)</span>
@@ -184,7 +192,7 @@ const ThirdSection = () => {
               </TextBox>
             </OverlapTextWrap>
             <OverlapTextWrap>
-              <img src="/public/icon_ban_box.svg" alt="" />
+              <img src={banBox} alt="" />
               <TextBox>
                 <h4>누적 소분 팩 개수</h4>
                 <p>
@@ -193,7 +201,7 @@ const ThirdSection = () => {
               </TextBox>
             </OverlapTextWrap>
             <OverlapTextWrap>
-              <img src="/public/icon_ban_doctor.svg" alt="" />
+              <img src={doctor} alt="" />
               <TextBox>
                 <h4>참여 전문의 수</h4>
                 <p>

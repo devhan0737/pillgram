@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import KakaoLogin from "react-kakao-login";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { Kakao, kakaoIcon } from "../assets/theme";
 
 const KakaoLoginWrapper = styled.div`
   width: 100%;
@@ -53,7 +54,7 @@ const SocialKakao = () => {
           onLogout={() => console.log("로그아웃")}
           render={({ onClick }) => (
             <button onClick={onClick}>
-              <img src="/public/icon_kakao_black.svg" alt="카카오icon" />
+              <img src={kakaoIcon} alt="카카오 아이콘" />
               카카오로 계속하기
             </button>
           )}

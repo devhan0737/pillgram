@@ -9,6 +9,7 @@ import {
   IsMobile,
 } from "../../lib/media-query/mediaQuery";
 import { useLocation } from "react-router-dom";
+import { LogoIcon } from "../../assets/theme";
 
 const Container = styled.header`
   max-width: 100%;
@@ -75,7 +76,9 @@ const Header = () => {
       <Dim isOpen={isMenuOpen} onClick={toggleMenu} />
       <Nav>
         <Logo>
-          <a href="/"></a>
+          <a href="/">
+            <img src={LogoIcon} alt="로고이미지" />
+          </a>
         </Logo>
 
         <GnbWrapper isOpen={isMenuOpen} />

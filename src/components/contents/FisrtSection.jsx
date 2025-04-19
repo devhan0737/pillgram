@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { mq, IsDesktop } from "../../lib/media-query/mediaQuery";
 import Button from "../button/Button";
+import mobileBg from "../../assets/img/mobilebackground.png";
+
 const Container = styled.div`
   width: 100%;
   height: 540px;
@@ -24,7 +26,7 @@ const BackgroundImg = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("../../../public/mobilebackground.png");
+    background-image: url(${mobileBg});
     background-size: cover;
     background-position: center;
     z-index: 1;

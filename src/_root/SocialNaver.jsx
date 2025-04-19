@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import { NaverIcon } from "../assets/theme";
 
 const Container = styled.div`
   width: 100%;
@@ -42,7 +43,7 @@ const SocialNaver = () => {
     <Container>
       <div id="naverIdLogin" style={{ display: "none" }}></div>
       <CustomButton onClick={handleNaverLogin}>
-        <img src="/public/icon_naver_white.svg" alt="" />
+        <img src={NaverIcon} alt="네이버 아이콘" />
         네이버로 계속하기
       </CustomButton>
     </Container>
