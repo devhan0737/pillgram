@@ -1451,4 +1451,4 @@ PERFORMANCE OF THIS SOFTWARE.
   max-width: 100%;
   flex-direction: column;
   position: relative;
-`;function B5(){return x.jsxs(x.Fragment,{children:[x.jsxs(Hy,{children:[x.jsx(Rs,{path:"/",element:x.jsx(s4,{})}),x.jsx(Rs,{path:"/pillgram/login",element:x.jsx(b4,{})}),x.jsx(Rs,{path:"/pillgram/SignupPage",element:x.jsx($5,{})}),x.jsx(Rs,{path:"/pillgram/auth/naver/callback",element:x.jsx(F5,{})})]}),x.jsxs(V5,{children:[x.jsx(bx,{}),x.jsx(R4,{})]})]})}G1.createRoot(document.getElementById("root")).render(x.jsx(px,{basename:"/pillgram/",children:x.jsx(N.StrictMode,{children:x.jsx(B5,{})})}));
+`;function B5(){return x.jsxs(x.Fragment,{children:[x.jsxs(Hy,{children:[x.jsx(Rs,{path:"/",element:x.jsx(s4,{})}),x.jsx(Rs,{path:"/pillgram/login",element:x.jsx(b4,{})}),x.jsx(Rs,{path:"/pillgram/SignupPage",element:x.jsx($5,{})}),x.jsx(Rs,{path:"/pillgram/auth/naver/callback",element:x.jsx(F5,{})})]}),x.jsxs(V5,{children:[x.jsx(bx,{}),x.jsx(R4,{})]})]})}G1.createRoot(document.getElementById("root")).render(x.jsx(px,{basename:"/pillgram",children:x.jsx(N.StrictMode,{children:x.jsx(B5,{})})}));
