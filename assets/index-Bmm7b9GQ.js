@@ -1047,7 +1047,7 @@ PERFORMANCE OF THIS SOFTWARE.
   &:hover {
     background-color: #02b053;
   }
-`,h4=()=>{N.useEffect(()=>{const{naver:t}=window;new t.LoginWithNaverId({clientId:"V21Mza1VGYhXeF3apmDE",callbackUrl:"http://localhost:5173/",isPopup:!1,loginButton:{display:"none"}}).init()},[]);const n=()=>{document.getElementById("naverIdLogin").firstChild.click()};return x.jsxs(f4,{children:[x.jsx("div",{id:"naverIdLogin",style:{display:"none"}}),x.jsxs(p4,{onClick:n,children:[x.jsx("img",{src:Zv,alt:"네이버 아이콘"}),"네이버로 계속하기"]})]})},m4=G.div`
+`,h4=()=>{N.useEffect(()=>{const{naver:t}=window;new t.LoginWithNaverId({clientId:"V21Mza1VGYhXeF3apmDE",callbackUrl:"https://devhan0737.github.io/pillgram/",isPopup:!1,loginButton:{display:"none"}}).init()},[]);const n=()=>{document.getElementById("naverIdLogin").firstChild.click()};return x.jsxs(f4,{children:[x.jsx("div",{id:"naverIdLogin",style:{display:"none"}}),x.jsxs(p4,{onClick:n,children:[x.jsx("img",{src:Zv,alt:"네이버 아이콘"}),"네이버로 계속하기"]})]})},m4=G.div`
   display: flex;
   justify-content: center;
   width: 100%;
